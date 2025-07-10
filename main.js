@@ -29,3 +29,10 @@ instructionDiv.style.zIndex = '100';
 instructionDiv.style.pointerEvents = 'none';
 instructionDiv.innerHTML = "Pressione a tecla 'C' para trocar de câmera";
 document.body.appendChild(instructionDiv);
+
+// CÂMERAS
+
+const backgroundCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const cameraPerspectiva = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+cameraPerspectiva.position.z = 10;
+cameraPerspectiva.name = "Perspectiva";
