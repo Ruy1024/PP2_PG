@@ -14,3 +14,18 @@ const renderer = new THREE.WebGLRenderer({ antialias: true })
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
+
+// INSTRUÇÃO DE INTERAÇÃO NA TELA
+
+const instructionDiv = document.createElement('div');
+instructionDiv.style.position = 'absolute';
+instructionDiv.style.bottom = '20px';
+instructionDiv.style.width = '100%';
+instructionDiv.style.textAlign = 'center';
+instructionDiv.style.color = 'white';
+instructionDiv.style.fontFamily = 'monospace';
+instructionDiv.style.fontSize = '16px';
+instructionDiv.style.zIndex = '100';
+instructionDiv.style.pointerEvents = 'none';
+instructionDiv.innerHTML = "Pressione a tecla 'C' para trocar de câmera";
+document.body.appendChild(instructionDiv);
