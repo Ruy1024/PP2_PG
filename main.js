@@ -36,3 +36,14 @@ const backgroundCamera = new THREE.PerspectiveCamera(75, window.innerWidth / win
 const cameraPerspectiva = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 cameraPerspectiva.position.z = 10;
 cameraPerspectiva.name = "Perspectiva";
+
+const aspect = window.innerWidth / window.innerHeight;
+const frustumSize = 15;
+const cameraOrtografica = new THREE.OrthographicCamera(
+    frustumSize * aspect / -2, frustumSize * aspect / 2,
+    frustumSize / 2, frustumSize / -2,
+    0.1, 100
+);
+cameraOrtografica.position.y = 12;
+cameraOrtografica.lookAt(scene.position);
+cameraOrtografica.name = "Ortográfica (Topo)";
