@@ -47,3 +47,7 @@ const cameraOrtografica = new THREE.OrthographicCamera(
 cameraOrtografica.position.y = 12;
 cameraOrtografica.lookAt(scene.position);
 cameraOrtografica.name = "Ortográfica (Topo)";
+
+cameraOrtograficaLado.position.set(12, 6, 0);
+cameraOrtograficaLado.lookAt(scene.position);
+cameraOrtograficaLado.name = "Ortográfica (Lateral)";
