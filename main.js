@@ -15,6 +15,29 @@ renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.autoClear = false
 document.body.appendChild(renderer.domElement)
 
+
+// FUNÇÃO PARA CRIAR O FUNDO DE ESTRELAS
+function createStarfield() {
+    const starVertices = [];
+    for (let i = 0; i < 10000; i++) {
+        const x = (Math.random() - 0.5) * 200;
+        const y = (Math.random() - 0.5) * 200;
+        const z = (Math.random() - 0.5) * 200;
+        starVertices.push(x, y, z);
+    }
+    const starGeometry = new THREE.BufferGeometry();
+    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+    const starMaterial = new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 0.15,
+        sizeAttenuation: true,
+        transparent: true
+    });
+    const stars = new THREE.Points(starGeometry, starMaterial);
+    backgroundScene.add(stars);
+}
+createStarfield();
+
 // INSTRUÇÃO DE INTERAÇÃO NA TELA
 
 const instructionDiv = document.createElement('div');
@@ -69,6 +92,12 @@ cubo.scale.set(1.5, 1.5, 1.5);
 cubo.position.set(-3, 0, 0);
 scene.add(cubo);
 
+// OBJETO ADICIONAL: LUA ORBITANDO O CUBO
+const geometriaLua = new THREE.SphereGeometry(0.3, 16, 16);
+const materialLua = new THREE.MeshStandardMaterial({ color: 0xeeeeee, roughness: 0.8 });
+const lua = new THREE.Mesh(geometriaLua, materialLua);
+cubo.add(lua); // Adiciona a lua como filha do cubo
+
 // Objeto 2: Esfera com Shader
 const shaderUniforms = { u_time: { value: 0.0 }, u_color: { value: new THREE.Color(0xff0000) } };
 const materialShader = new THREE.RawShaderMaterial({
@@ -118,6 +147,13 @@ aneis.rotation.x = Math.PI / 2;
 saturno.add(aneis);
 saturno.position.set(3, 2, -2);
 scene.add(saturno);
+
+// Objeto 4: Foguete Orbital
+const foguete = new THREE.Group();
+const materialCorpo = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalness: 0.8, roughness: 0.4 });
+const geometriaCorpo = new THREE.CylinderGeometry(0.2, 0.2, 1.2, 16);
+const corpo = new THREE.Mesh(geometriaCorpo, materialCorpo);
+foguete.add(corpo);
 
 // ====================ALTERAR NO FINAL DO PROJETO===========================
 //tudo pra baixo olhar novamente no final
