@@ -51,3 +51,15 @@ cameraOrtografica.name = "Ortográfica (Topo)";
 cameraOrtograficaLado.position.set(12, 6, 0);
 cameraOrtograficaLado.lookAt(scene.position);
 cameraOrtograficaLado.name = "Ortográfica (Lateral)";
+
+// OBJETOS 3D
+
+// Objeto 1: Cubo com Textura
+const textureLoader = new THREE.TextureLoader();
+const minhaTextura = textureLoader.load('assets/terra.jfif');
+const materialCubo = new THREE.MeshBasicMaterial({ map: minhaTextura });
+const geometriaCubo = new THREE.BoxGeometry(1, 1, 1);
+const cubo = new THREE.Mesh(geometriaCubo, materialCubo);
+cubo.scale.set(1.5, 1.5, 1.5);
+cubo.position.set(-3, 0, 0);
+scene.add(cubo);
