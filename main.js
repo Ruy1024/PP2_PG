@@ -47,6 +47,11 @@ const cameraOrtografica = new THREE.OrthographicCamera(
 cameraOrtografica.position.y = 12;
 cameraOrtografica.lookAt(scene.position);
 cameraOrtografica.name = "Ortográfica (Topo)";
+const cameraOrtograficaLado = new THREE.OrthographicCamera(
+    frustumSize * aspect / -2, frustumSize * aspect / 2,
+    frustumSize / 2, frustumSize / -2,
+    0.1, 100
+);
 
 cameraOrtograficaLado.position.set(12, 6, 0);
 cameraOrtograficaLado.lookAt(scene.position);
