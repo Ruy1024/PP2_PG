@@ -63,3 +63,40 @@ const cubo = new THREE.Mesh(geometriaCubo, materialCubo);
 cubo.scale.set(1.5, 1.5, 1.5);
 cubo.position.set(-3, 0, 0);
 scene.add(cubo);
+
+// Objeto 2: Esfera com Shader
+const shaderUniforms = { u_time: { value: 0.0 }, u_color: { value: new THREE.Color(0xff0000) } };
+const materialShader = new THREE.RawShaderMaterial({
+    uniforms: shaderUniforms,
+    vertexShader: `
+    attribute vec3 position;
+    attribute vec2 uv;
+    
+    uniform mat4 modelViewMatrix;
+    uniform mat4 projectionMatrix;
+
+    varying vec2 vUv;
+   
+    void main(){
+    vUv=uv;
+    gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}
+    `,
+    fragmentShader: `precision mediump float;
+    
+    varying vec2 vUv;
+    uniform float u_time;
+    uniform vec3 u_color;
+    
+    void main(){
+    float wave=sin(vUv.y*10.0+u_time*2.0)*0.5+0.5;
+    
+    vec3 finalColor=u_color*wave;
+    gl_FragColor=vec4(finalColor,1.0);
+    }
+   `
+});
+const geometriaEsfera = new THREE.SphereGeometry(1, 32, 32);
+const esfera = new THREE.Mesh(geometriaEsfera, materialShader);
+esfera.scale.set(1.2, 1.2, 1.2);
+esfera.position.set(0, 1, 1);
+scene.add(esfera);
