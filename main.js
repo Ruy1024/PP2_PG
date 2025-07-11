@@ -100,3 +100,16 @@ const esfera = new THREE.Mesh(geometriaEsfera, materialShader);
 esfera.scale.set(1.2, 1.2, 1.2);
 esfera.position.set(0, 1, 1);
 scene.add(esfera);
+
+// Objeto 3: Saturno com Movimento
+const materialSaturno = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide });
+const saturno = new THREE.Group();
+const geometriaPlaneta = new THREE.SphereGeometry(0.8, 32, 32);
+const planeta = new THREE.Mesh(geometriaPlaneta, materialSaturno);
+saturno.add(planeta);
+const geometriaAneis = new THREE.RingGeometry(1, 1.6, 64);
+const aneis = new THREE.Mesh(geometriaAneis, materialSaturno);
+aneis.rotation.x = Math.PI / 2;
+saturno.add(aneis);
+saturno.position.set(3, 2, -2);
+scene.add(saturno);
