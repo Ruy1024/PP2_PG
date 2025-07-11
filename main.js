@@ -118,3 +118,74 @@ aneis.rotation.x = Math.PI / 2;
 saturno.add(aneis);
 saturno.position.set(3, 2, -2);
 scene.add(saturno);
+
+// ====================ALTERAR NO FINAL DO PROJETO===========================
+//tudo pra baixo olhar novamente no final
+// INTERAÇÃO E LOOP DE ANIMAÇÃO 
+
+
+// Array para troca de câmeras
+const cameras = [cameraPerspectiva, cameraOrtografica, cameraOrtograficaLado];
+let cameraAtualIndex = 0;
+let activeCamera = cameras[cameraAtualIndex];
+
+// Event listener para a tecla 'C'
+window.addEventListener('keydown', (event) => {
+    if (event.key.toLowerCase() === 'c') {
+        cameraAtualIndex = (cameraAtualIndex + 1) % cameras.length;
+        activeCamera = cameras[cameraAtualIndex];
+        console.log(`Câmera trocada para: ${activeCamera.name}`);
+    }
+});
+
+// Relógio para  animação
+const clock = new THREE.Clock();
+
+function animate() {
+    
+    requestAnimationFrame(animate);
+
+    const elapsedTime = clock.getElapsedTime();
+    
+    cubo.rotation.y = elapsedTime * 0.2;
+   
+    saturno.rotation.x = elapsedTime * 0.5;
+    saturno.rotation.y = elapsedTime * 0.3;
+    
+    shaderUniforms.u_time.value = elapsedTime;
+
+    backgroundCamera.quaternion.copy(activeCamera.quaternion);
+    
+    renderer.clear(); 
+    renderer.render(backgroundScene, backgroundCamera); 
+    renderer.clearDepth(); 
+    renderer.render(scene, activeCamera); 
+}
+
+
+window.addEventListener('resize', () => {
+    const newAspect = window.innerWidth / window.innerHeight;
+    
+
+    backgroundCamera.aspect = newAspect;
+    backgroundCamera.updateProjectionMatrix();
+
+
+    cameraPerspectiva.aspect = newAspect;
+    cameraPerspectiva.updateProjectionMatrix();
+    
+
+    cameraOrtografica.left = frustumSize * newAspect / -2;
+    cameraOrtografica.right = frustumSize * newAspect / 2;
+    cameraOrtografica.updateProjectionMatrix();
+    
+    cameraOrtograficaLado.left = frustumSize * newAspect / -2;
+    cameraOrtograficaLado.right = frustumSize * newAspect / 2;
+    cameraOrtograficaLado.updateProjectionMatrix();
+    
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+
+animate();
