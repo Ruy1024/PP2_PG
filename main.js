@@ -246,6 +246,18 @@ function animate() {
   saturno.rotation.x = elapsedTime * 0.5
   saturno.rotation.y = elapsedTime * 0.3
 
+  // Animação da Órbita do Foguete
+  const orbitalRadius = 5.5
+  const orbitalSpeed = 0.4
+  const rocketX = Math.sin(elapsedTime * orbitalSpeed) * orbitalRadius
+  const rocketZ = Math.cos(elapsedTime * orbitalSpeed) * orbitalRadius
+  foguete.position.set(rocketX, 1.5, rocketZ)
+  const angle = Math.atan2(
+    Math.cos(elapsedTime * orbitalSpeed),
+    -Math.sin(elapsedTime * orbitalSpeed)
+  )
+  foguete.rotation.set(Math.PI / 2, angle + Math.PI / 2, 0)
+
   shaderUniforms.u_time.value = elapsedTime
 
   backgroundCamera.quaternion.copy(activeCamera.quaternion)
