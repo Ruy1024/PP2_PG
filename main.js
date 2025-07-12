@@ -209,8 +209,6 @@ for (let i = 0; i < 3; i++) {
 foguete.scale.set(0.8, 0.8, 0.8)
 scene.add(foguete)
 
-// ====================ALTERAR NO FINAL DO PROJETO===========================
-//tudo pra baixo olhar novamente no final
 // INTERAÇÃO E LOOP DE ANIMAÇÃO
 
 // Array para troca de câmeras
@@ -258,8 +256,10 @@ function animate() {
   )
   foguete.rotation.set(Math.PI / 2, angle + Math.PI / 2, 0)
 
+  // Atualização do shader da esfera
   shaderUniforms.u_time.value = elapsedTime
 
+  // Renderização
   backgroundCamera.quaternion.copy(activeCamera.quaternion)
 
   renderer.clear()
@@ -268,6 +268,7 @@ function animate() {
   renderer.render(scene, activeCamera)
 }
 
+// Rodar o evento
 window.addEventListener("resize", () => {
   const newAspect = window.innerWidth / window.innerHeight
 
