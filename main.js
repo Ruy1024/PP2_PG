@@ -154,6 +154,24 @@ const materialCorpo = new THREE.MeshStandardMaterial({ color: 0xcccccc, metalnes
 const geometriaCorpo = new THREE.CylinderGeometry(0.2, 0.2, 1.2, 16);
 const corpo = new THREE.Mesh(geometriaCorpo, materialCorpo);
 foguete.add(corpo);
+const materialNariz = new THREE.MeshStandardMaterial({ color: 0xff4500, metalness: 0.5, roughness: 0.5 });
+const geometriaNariz = new THREE.ConeGeometry(0.2, 0.5, 16);
+const nariz = new THREE.Mesh(geometriaNariz, materialNariz);
+nariz.position.y = 0.6 + 0.25;
+foguete.add(nariz);
+const materialAsa = new THREE.MeshStandardMaterial({ color: 0xff4500, metalness: 0.5, roughness: 0.5 });
+const geometriaAsa = new THREE.BoxGeometry(0.8, 0.3, 0.05);
+for (let i = 0; i < 3; i++) {
+    const asa = new THREE.Mesh(geometriaAsa, materialAsa);
+    const angulo = (i / 3) * Math.PI * 2;
+    asa.position.y = -0.4;
+    asa.position.x = Math.cos(angulo) * 0.15;
+    asa.position.z = Math.sin(angulo) * 0.15;
+    asa.rotation.y = angulo;
+    foguete.add(asa);
+}
+foguete.scale.set(0.8, 0.8, 0.8);
+scene.add(foguete);
 
 // ====================ALTERAR NO FINAL DO PROJETO===========================
 //tudo pra baixo olhar novamente no final
