@@ -72,5 +72,20 @@ Este projeto foi desenvolvido como parte da disciplina de **Processamento Gráfi
 
 ## Como Executar o Projeto
 
-Clone o repositório:
+1. Clone o repositório:
    git clone https://github.com/Ruy1024/PP2_PG.git
+
+2. Abra o projeto no Visual Studio Code.
+
+3. Instale a extensão Live Server:
+
+No VSCode, vá em Extensões (Ctrl+Shift+X) e pesquise por "Live Server".
+Instale a extensão desenvolvida por Ritwick Dey.
+
+4. Execute o projeto:
+
+Abra o arquivo index.html.
+Clique com o botão direito e selecione "Open with Live Server".
+O navegador abrirá automaticamente com a cena 3D renderizada via Three.js.
+
+Observação: a execução via Live Server é necessária porque o Three.js faz requisições que não funcionam diretamente com "duplo clique" no index.html.
